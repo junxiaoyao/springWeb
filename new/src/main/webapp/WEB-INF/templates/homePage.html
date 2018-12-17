@@ -11,6 +11,7 @@
       <script th:src="@{/bootstrap/js/bootstrap.js}" src="../static/bootstrap/js/bootstrap.js"></script>-->
 </head>
 <body>
+<p th:text="#{name}">default message</p><!--
 <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -19,7 +20,7 @@
                     <span class="panel-title">学生信息</span>
                 </div>
                 <div class="panel-body">
-                    编号：<span th:text="#{name}">2</span><br/>
+                   code：<p th:text="#{name}">2</p><br/>
                 </div>
                 <div class="panel-footer text-right">
                     <span class="panel-title">酒城工作室@2107</span>
@@ -28,5 +29,5 @@
         </div>
     </div>
 </div>
-</body>
+--></body>
 </html>

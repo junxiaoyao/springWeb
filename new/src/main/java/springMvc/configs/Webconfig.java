@@ -34,7 +34,8 @@ public class Webconfig extends WebMvcConfigurerAdapter {
     public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
-
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(true);
         return templateEngine;
     }
     //模板解析器

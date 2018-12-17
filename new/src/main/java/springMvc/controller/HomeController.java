@@ -16,7 +16,7 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model){
         System.out.println("测试访问");
-        model.addAttribute("name","测试用户");
+        model.addAttribute("name","luanfa");
         return "homePage";
     }
 }
