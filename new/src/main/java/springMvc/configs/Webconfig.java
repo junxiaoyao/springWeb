@@ -78,7 +78,7 @@ public class Webconfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/statics/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/statics/js/");
-        registry.addResourceHandler("/image/**").addResourceLocations("WEB-INF/statics/image/");
+        registry.addResourceHandler("/img/**").addResourceLocations("WEB-INF/statics/img/");
         super.addResourceHandlers(registry);
     }
 }

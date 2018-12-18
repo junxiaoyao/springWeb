@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import springMvc.entity.Users;
 
 /**
  * @Auther: ybl
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Description:
  */
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model){
         System.out.println("测试访问");
+        Users users=new Users();users.setSex("男的");users.setUserName("宝天帝君");
         model.addAttribute("name","luanfa");
+        model.addAttribute("user",users);
         return "homePage";
     }
 }
