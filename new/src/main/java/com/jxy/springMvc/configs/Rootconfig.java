@@ -1,9 +1,12 @@
-package springMvc.configs;
+package com.jxy.springMvc.configs;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
@@ -12,7 +15,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @Description:
  */
 @Configuration
-@ComponentScan(basePackages = {"springMvc.service"},
+@EnableTransactionManagement
+@Import(DataConfig.class)
+@ComponentScan(basePackages = {"com.jxy.springMvc.service","com.jxy.springMvc.dao"},
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)})
 public class Rootconfig {
 }

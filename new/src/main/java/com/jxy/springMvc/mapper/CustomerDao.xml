@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxy.springMvc.dao.CustomerDao">
+	<resultMap type="com.jxy.springMvc.entity.CustomerEntity" id="customer">
+		<id property="customerId" column="customerId" />
+		<result property="customerName" column="customerName" />
+		<result property="customerAddress" column="customerAddress" />
+		<result property="customerPhone" column="customerPhone" />
+		<result property="email" column="email" />
+		<result property="company" column="company" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+
+	<select id="getList" resultMap="customer">
+		select * from customers where 1=1
+		<if test="customerName != null and customerName != '' ">
+			AND customerName like '%${customerName}%'
+		</if>
+	 ORDER BY customerId limit #{1},#{2} 	
+	</select>
+	<select id="getCustomerEntitiesByName"  resultMap="customer">
+	select * from customers where 1=1
+		<if test="customerName != null and customerName != '' ">
+			AND customerName like '%${customerName}%'
+		</if>	
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from customers where 1=1
+		<if test="customerName != null and customerName != '' ">
+			AND customerName like '%${customerName}%'
+		</if>
+	</select>
+	<delete id="delete">delete from customers where customerId =#{0}</delete>
+	<update id="update">
+		update customers set customerName=#{customerName},customerAddress=#{customerAddress},company=#{company},customerPhone=#{customerPhone},email=#{email}
+		where customerId =#{customerId}
+	</update>
+	<insert id="add">
+	insert into customers(customerName,customerAddress,company,customerPhone,email,createTime)
+	 values(#{customerName},#{customerAddress},#{company},#{customerPhone},#{email},#{createTime})
+	</insert>
+</mapper>

@@ -1,7 +1,8 @@
-package springMvc.service.impl;
+package com.jxy.springMvc.service.impl;
 
+import com.jxy.springMvc.service.BaseService;
 import org.springframework.stereotype.Service;
-import springMvc.service.BaseService;
+
 @Service
 public class BaseServiceImpl implements BaseService {
     @Override

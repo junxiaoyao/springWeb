@@ -1,4 +1,4 @@
-package springMvc.service;
+package com.jxy.springMvc.service;
 
 public interface BaseService {
     int count();

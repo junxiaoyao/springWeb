@@ -1,0 +1,39 @@
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="questOne" class="partOne.bean.OneQuest"/>
+    <bean id="simpleAop" class="partOne.bean.SimpleAop"/>
+    <bean id="knight" class="partOne.bean.BraveKnight"
+          c:_0-ref="questOne"/>
+    <util:list id="songs">
+        <ref bean="questOne"/>
+    </util:list>
+    <bean id="twoQ" class="partOne.bean.TwoQuest" p:str="settee" p:songs-ref="songs">
+       &lt;!&ndash; <constructor-arg value="开始调用集合"/>
+        <constructor-arg>
+            <list>
+                <ref bean="questOne" />
+            </list>
+        </constructor-arg>&ndash;&gt;
+
+    </bean>
+    <aop:config>
+        <aop:aspect ref="simpleAop">
+            <aop:pointcut id="cutOne" expression="execution(* *.useQ(..))"/>
+            <aop:before pointcut-ref="cutOne" method="before"/>
+            <aop:after pointcut-ref="cutOne" method="after"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
+-->

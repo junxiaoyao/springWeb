@@ -1,4 +1,4 @@
-package springMvc.configs;
+package com.jxy.springMvc.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +20,7 @@ import org.thymeleaf.templateresolver.TemplateResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "springMvc.controller")
+@ComponentScan(basePackages = "com.jxy.springMvc.controller")
 public class Webconfig extends WebMvcConfigurerAdapter {
     //视图解析器
     @Bean
@@ -51,7 +51,7 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         return templateResolver;
     }
 
-    // 静态资源配置
+    // 静态资源配置将静态资源的请求转发到servlet容器中默认的servlet上
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
