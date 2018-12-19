@@ -60,6 +60,5 @@ public class Webconfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/statics/**").addResourceLocations("WEB-INF/statics/**");
-        super.addResourceHandlers(registry);
     }
 }
