@@ -16,8 +16,9 @@ import springMvc.entity.Users;
 public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(Model model){
-        System.out.println("测试访问");
-        Users users=new Users();users.setSex("男的");users.setUserName("宝天帝君");
+        Users users=new Users();
+        users.setSex("男的");
+        users.setUserName("宝天帝君");
         model.addAttribute("name","luanfa");
         model.addAttribute("user",users);
         return "homePage";

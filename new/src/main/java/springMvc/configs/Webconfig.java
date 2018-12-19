@@ -78,7 +78,21 @@ public class Webconfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/statics/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/statics/js/");
+        registry.addResourceHandler("/home/**").addResourceLocations("/WEB-INF/statics/home/");
         registry.addResourceHandler("/img/**").addResourceLocations("WEB-INF/statics/img/");
         super.addResourceHandlers(registry);
     }
 }
+/*
+* @Configuration
+@EnableWebMvc
+public class WebConfig extends WebMvcConfigurerAdapter {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/public-resources/")
+                .resourceChain(true).addResolver(
+                    new VersionResourceResolver().addContentVersionStrategy("/**"));
+    }
+}
+*/
