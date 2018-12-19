@@ -1,4 +1,5 @@
 package springMvc.configs;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,7 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         viewResolver.setCharacterEncoding("utf-8");
         return viewResolver;
     }
+
     //模板引擎
     @Bean
     public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
@@ -38,6 +40,7 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         templateResolver.setCacheable(true);
         return templateEngine;
     }
+
     //模板解析器
     @Bean
     public TemplateResolver templateResolver() {
@@ -47,52 +50,16 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
-    /* @Bean
-     public ViewResolver viewResolver() {
-         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-         resolver.setPrefix("/web/WEB-INF/");
-         resolver.setSuffix(".jsp");
-         resolver.setExposeContextBeansAsAttributes(true);
-        //resolver.setcl
-         return resolver;
-     }*/
-   /* @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine springTemplateEngine) {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(springTemplateEngine);
-        ITemplateResolver
-        return viewResolver;
-    }*/
-  /*  @Bean
-    public ServletContextTemplateResolver templateResolver(){
-    TemplateResolver templateResolver=new ServletContextTemplateResolver();
 
-        return templateResolver;
-    }*/
-// 静态资源配置
+    // 静态资源配置
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/statics/css/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/statics/js/");
-        registry.addResourceHandler("/home/**").addResourceLocations("/WEB-INF/statics/home/");
-        registry.addResourceHandler("/img/**").addResourceLocations("WEB-INF/statics/img/");
+        registry.addResourceHandler("/statics/**").addResourceLocations("WEB-INF/statics/**");
         super.addResourceHandlers(registry);
     }
 }
-/*
-* @Configuration
-@EnableWebMvc
-public class WebConfig extends WebMvcConfigurerAdapter {
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**")
-                .addResourceLocations("/public-resources/")
-                .resourceChain(true).addResolver(
-                    new VersionResourceResolver().addContentVersionStrategy("/**"));
-    }
-}
-*/
