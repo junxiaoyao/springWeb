@@ -2,6 +2,9 @@ package springMvc.entity;
 
 import java.io.Serializable;
 
+/**
+ * cs
+ */
 public class Users implements Serializable {
     private String userName;
     private String sex;
