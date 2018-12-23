@@ -1,14 +1,14 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"/>
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+	content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <title>松度电脑开票业务系统</title>
-<link rel="stylesheet" href="plugins/layui/css/layui.css">
-<script src="js/jquery1.9.1.js"></script>
-<script src="plugins/layui/layui.js"></script>
+<script th:src="@{/statics/js/jquery1.9.1.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/statics/assets/layui/css/layui.css}"/>
+	<script type="text/javascript" th:src="@{/statics/assets/layui/layui.js}"></script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -45,7 +45,7 @@
 	
 	function getLoginUser(){
 			$.ajax({
-				url : 'getLoginUser.do',
+				url : 'mystudy/getLoginUser',
 				data : {},
 				type : 'get',
 				async:false,

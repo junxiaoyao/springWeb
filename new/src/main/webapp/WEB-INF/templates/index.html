@@ -4,10 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>后台管理登录</title>
 <link rel="stylesheet" type="text/css" th:href="@{/statics/assets/layui/css/layui.css}"/>
-<link th:href="@{/static/css/mainGuan.css}" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/jquery1.9.1.js"></script>
-<script type="text/javascript" src="js/fun.base.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<link th:href="@{/statics/css/back/main.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" th:src="@{/statics/js/jquery1.9.1.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/fun.base.js}"></script>
+<script type="text/javascript" th:src="@{/statics/js/script.js}"></script>
 <script th:src="@{/statics/assets/layui/layui.js}"></script>
 <script th:src="@{/statics/assets/plugins/md5.js}"></script>
 </head>
@@ -48,7 +48,7 @@
 		var userName = $('#name').val();
 		var password = $('#password').val();
 		$.ajax({
-			url : 'userLogin.do',
+			url : '/mystudy/userLogin',
 			type : 'post',
 			data : {
 				'userName' : userName,

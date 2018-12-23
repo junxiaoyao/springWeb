@@ -22,13 +22,14 @@ import java.util.List;
 public class UserController {
 	@Autowired
 	private IUserService userService;
+	@RequestMapping("/backLogin")
 	public String loginMain(){
 		return "index";
 	}
 	// 系统主界面
 	@RequestMapping(value = "/main")
 	public String main(HttpServletRequest request, HttpServletResponse response) {
-		return "main.jsp";
+		return "main";
 	}
 
 	// 测试HTML

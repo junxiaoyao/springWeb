@@ -16,8 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="roleName" column="roleName" />
 	</resultMap>
 	<select id="userLogin" resultMap="user">
-		select * from users where
-		userName=#{0} and userPassword=#{1}
+	select * from users where
+		userName=#{userName} and userPassword=#{userPassword}
 	</select>
 	<select id="getList" resultMap="user" >
 		select u.userId,u.userName,u.userrealName,u.userPassword,u.userPhone,

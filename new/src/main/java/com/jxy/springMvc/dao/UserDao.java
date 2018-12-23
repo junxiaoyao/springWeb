@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface UserDao extends BaseDao<UserEntity>{
-	UserEntity userLogin(String userName, String userPassword);
+	UserEntity userLogin(@Param("userName") String userName,@Param("userPassword") String userPassword);
 	int count(@Param("userName") String userName, @Param("realName") String realName);
 	void update(UserEntity entity);
 	List<UserEntity> getList(@Param("userName") String userName, @Param("realName") String realName, int begin, int end);
