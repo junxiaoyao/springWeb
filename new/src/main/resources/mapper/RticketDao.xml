@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxy.springMvc.dao.RticketDao">
+	<resultMap type="com.jxy.springMvc.entity.RticketEntity" id="ticket">
+		<id property="rTicketId" column="rTicketId" />
+		<result property="ticketNum" column="ticketNum" />
+		<result property="createTime" column="createTime" />
+		<result property="remark" column="remark" />
+		<result property="customerName" column="customerName" />
+		<result property="type" column="type" />
+		<result property="realName" column="realName" />
+		<result property="pic" column="pic" />
+		<result property="ticketCode" column="ticketCode" />
+	</resultMap>
+
+	<select id="getList" resultMap="ticket">
+		SELECT
+		r.rticketId,
+		r.remark,
+		r.createTime,
+		u.userrealName as realName,
+		t1.ticketNum,
+		t1.pic,
+		t1.ticketCode,
+		t2.state as type,
+		c.customerName
+		FROM
+		rtickets r
+		LEFT JOIN
+		tickets t1 ON r.ticketId = t1.ticketId
+		LEFT JOIN users u ON r.userId =
+		u.userId
+		LEFT JOIN ticketstate t2 ON r.rType = t2.ticketStateId
+		LEFT
+		JOIN customers c on r.customerId=c.customerId
+		where 1=1
+		<if test="ticketNum != null and ticketNum != '' ">
+			AND r.ticketId IN(SELECT ticketId FROM tickets t3 WHERE t3.ticketNum
+			LIKE '%${ticketNum}%') 
+		</if>
+		<if test="customerName != null and customerName != '' ">
+				AND r.ticketId IN (
+				SELECT
+				ticketId
+				FROM
+				tickets t4
+				WHERE
+				t4.customerId in (SELECT customerId FROM customers c1 where c1.customerName like
+				'%${customerName}%'))
+			</if>
+		ORDER BY rTicketId limit #{2},#{3}
+	</select>
+	<select id="countTicket" resultType="int">
+	select count(*) from rtickets t1 where t1.rtype = #{1} and t1.createTime BETWEEN #{2} And
+		#{3}
+		<if test="customerName != null and customerName != '' ">
+			AND t1.customerId in (SELECT customerId FROM customers c1
+			where c1.customerName like '%${customerName}%')
+		</if>
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from rtickets r where 1=1
+			<if test="ticketNum != null and ticketNum != '' ">
+			AND r.ticketId IN(SELECT ticketId FROM tickets t3 WHERE t3.ticketNum
+			LIKE '%${ticketNum}%')
+		</if>
+		<if test="customerName != null and customerName != '' ">
+				AND r.ticketId IN (
+				SELECT
+				ticketId
+				FROM
+				tickets t4
+				WHERE
+				t4.customerId in (SELECT customerId FROM customers c1 where c1.customerName like
+				'%${customerName}%'))
+			</if>
+			
+	</select>
+	<insert id="add">
+		insert into rtickets(userId,ticketId,createTime,remark,rType,customerId) 
+		values(#{userId},#{ticketId},now(),#{remark},#{type},#{customerId}) 
+	</insert>
+	
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxy.springMvc.dao.UserDao">
+	<resultMap type="com.jxy.springMvc.entity.UserEntity" id="user">
+		<id property="userId" column="userId" />
+		<result property="userName" column="userName" />
+		<result property="realName" column="userrealName" />
+		<result property="password" column="userPassword" />
+		<result property="userPhone" column="userPhone" />
+		<result property="email" column="email" />
+		<result property="roleId" column="roleId" />
+		<result property="sex" column="sex" />
+		<result property="createTime" column="createTime" />
+		<result property="roleName" column="roleName" />
+	</resultMap>
+	<select id="userLogin" resultMap="user">
+		select * from users where
+		userName=#{0} and userPassword=#{1}
+	</select>
+	<select id="getList" resultMap="user" >
+		select u.userId,u.userName,u.userrealName,u.userPassword,u.userPhone,
+		u.email,u.roleId,u.sex,u.createTime,coalesce(r.roleName,'未分配角色') as roleName
+		 from users u
+		left join roles r on u.roleId=r.roleId
+		where 1=1 
+		<if test="userName != null and userName != '' ">
+		 AND u.userName like '%${userName}%'
+		</if>
+		<if test="realName != null and realName != '' ">
+		 AND u.userrealName like '%${realName}%' 
+		</if>
+		ORDER BY userId limit #{2},#{3} 	
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from users where 1=1 
+		<if test="userName != null and userName != '' ">
+		 AND userName like '%${userName}%'
+		</if>
+		<if test="realName != null and realName != '' ">
+		 AND userrealName like '%${realName}%' 
+		</if>
+	</select>
+	<select id="getAllList" resultMap="user">
+	select * from users
+	</select>
+	<insert id="add">
+		insert into users(userName,userPassword,userPhone,email,roleId,createTime,userRealname,sex)
+		 values(#{userName},#{password},#{userPhone},#{email},#{roleId}, #{createTime}, #{realName},#{sex})
+	</insert>
+	<delete id="delete">
+		delete from users where userId =#{0}
+	</delete>
+	<update id="update">
+		update users set userName =#{userName},sex=#{sex},roleId=#{roleId},email=#{email},
+		userPhone=#{userPhone},userPassword=#{password},userrealName=#{realName} where userId =#{userId}
+	</update>
+	<select id="getUserByName" resultType="int">select count(*) from users where userName = #{0} and userId !=#{1}</select>
+</mapper>

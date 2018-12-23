@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxy.springMvc.dao.TicketDao">
+	<resultMap type="com.jxy.springMvc.entity.TicketEntity" id="ticket">
+		<id property="ticketId" column="ticketId" />
+		<result property="ticketNum" column="ticketNum" />
+		<result property="ticketCode" column="ticketCode" />
+		<result property="moneyAccount" column="moneyAccount" />
+		<result property="reasonPayment" column="reasonPayment" />
+		<result property="customerName" column="customerName" />
+		<result property="ticketTime" column="ticketTime" />
+		<result property="createTime" column="createTime" />
+		<result property="state" column="state" />
+		<result property="pic" column="pic" />
+		<result property="company" column="company" />
+		<result property="customerId" column="customerId" />
+	</resultMap>
+
+	<select id="getList" resultMap="ticket">
+		select
+		ticketId,ticketNum,ticketCode,moneyAccount,pic,coalesce(company,'客户已删除') as company,reasonPayment,ticketTime,t1.createTime,t2.state
+		as state,coalesce(t3.customerName,'客户已删除') as customerName,t1.customerId
+		from tickets t1
+		left join ticketState t2 on t1.ticketStateId =t2.ticketStateId
+		left join customers t3 on t1.customerId=t3.customerId
+		where 1=1
+		<if test="customerName != null and customerName != '' ">
+			AND t1.customerId in (SELECT customerId FROM customers c1
+			where c1.customerName like '%${customerName}%')
+		</if>
+		<if test="ticketNum != null and ticketNum != '' ">
+			AND ticketNum like '%${ticketNum}%'
+		</if>
+		ORDER BY t1.createTime desc limit #{2},#{3}
+	</select>
+	<select id="getAllTicket" resultType="com.jxy.springMvc.entity.TicketEntity">
+		select * from tickets t
+		where t.ticketStateId=1
+	</select>
+	<select id="getOne" resultType="com.jxy.springMvc.entity.TicketEntity">
+		select * from tickets t where t.ticketId =#{0}
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from tickets t1 where 1=1
+		<if test="customerName != null and customerName != '' ">
+			AND t1.customerId in (SELECT customerId FROM customers c1
+			where c1.customerName like '%${customerName}%')
+		</if>
+		<if test="ticketNum != null and ticketNum != '' ">
+			AND ticketNum like '%${ticketNum}%'
+		</if>
+	</select>
+	<insert id="add" useGeneratedKeys="true" keyProperty="ticketId"
+		parameterType="com.jxy.springMvc.entity.TicketEntity">
+		insert into
+		tickets(ticketNum,ticketCode,moneyAccount,reasonPayment,customerId,ticketTime,createTime,ticketstateID)
+		values(#{ticketNum},#{ticketCode},#{moneyAccount},#{reasonPayment},#{customerId},#{ticketTime},#{createTime},1)
+	</insert>
+	<update id="updatePic">
+		update tickets set pic =#{1} where ticketId =#{0}
+	</update>
+	<update id="update">
+	update tickets set ticketNum =#{ticketNum},ticketCode=#{ticketCode},
+	customerId=#{customerId},reasonPayment=#{reasonPayment},moneyAccount=#{moneyAccount} where ticketId =#{ticketId}
+	</update>
+	<update id="updateState">
+		update tickets set ticketstateID =#{1} where ticketId =#{0}
+	</update>
+	
+	<select id="countTicket" resultType="int">
+		SELECT COUNT(*) FROM tickets t1 WHERE t1.ticketstateID=1 and t1.createTime BETWEEN #{1} And
+		#{2}
+		<if test="customerName != null and customerName != '' ">
+			AND t1.customerId in (SELECT customerId FROM customers c1
+			where c1.customerName like '%${customerName}%')
+		</if>
+	</select>
+	<select id="sumTurnover" resultType="com.jxy.springMvc.entity.TicketEntity">
+		SELECT COALESCE(sum(moneyAccount),0) as moneyAccount FROM tickets t1 WHERE t1.ticketstateID=1 and t1.createTime BETWEEN #{1} And
+		#{2}
+		<if test="customerName != null and customerName != '' ">
+			AND t1.customerId in (SELECT customerId FROM customers c1
+			where c1.customerName like '%${customerName}%')
+		</if>
+	</select>
+	<select id="selectTicket" resultType="int">
+		select count(*) from tickets t where ${column} = ${value} and t.ticketstateID=1
+		<if test="ticketId != null and ticketId != '' ">
+			AND t.ticketId  != ${ticketId}
+		</if>
+	</select>
+</mapper>

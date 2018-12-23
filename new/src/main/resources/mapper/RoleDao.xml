@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jxy.springMvc.dao.RoleDao">
+	<resultMap type="com.jxy.springMvc.entity.RoleEntity" id="role">
+		<id property="roleId" column="roleId" />
+		<result property="roleName" column="roleName" />
+		<result property="createTime" column="createTime" />
+		<result property="remark" column="remark" />
+		<result property="userId" column="userId" />
+		<result property="userName" column="userName" />
+	</resultMap>
+
+	<select id="getList" resultMap="role">
+		select * from roles where 1=1
+		<if test="roleName != null and roleName != '' ">
+			AND roleName like '%${roleName}%'
+		</if>
+		ORDER BY roleId limit #{1},#{2} 	
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from roles where 1=1
+		<if test="roleName != null and roleName != '' ">
+			AND roleName like '%${roleName}%'
+		</if>
+	</select>
+	<select id="getAllList" resultMap="role">
+	select * from roles
+	</select>
+	<insert id="addRole"  useGeneratedKeys="true" keyProperty="roleId" parameterType="com.jxy.springMvc.entity.RoleEntity">
+		insert into roles(roleName,createTime,remark,userId,userName) 
+		values(#{roleName},#{createTime},#{remark},#{userId},#{userName})
+	</insert>
+	<delete id="delete">
+	delete from roles where roleId =#{0}
+	</delete>
+	<update id="update">
+			update roles set roleName =#{roleName},remark=#{remark} where roleId=#{roleId}
+	</update>
+</mapper>

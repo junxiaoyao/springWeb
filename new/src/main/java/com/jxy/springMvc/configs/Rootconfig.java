@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableTransactionManagement
 @Import(DataConfig.class)
-@ComponentScan(basePackages = {"com.jxy.springMvc.service","com.jxy.springMvc.dao"},
+@ComponentScan(basePackages = {"com.jxy.springMvc.service","com.jxy.springMvc.dao","com.jxy.springMvc.configs"},
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)})
 public class Rootconfig {
 }

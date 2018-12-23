@@ -1,4 +1,5 @@
 package com.jxy.springMvc.configs;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,8 +18,9 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 
 @Configuration
-@MapperScan(basePackages = "com.jxy.springMvc.mapper.**")
-public class DataConfig{
+@PropertySource("classpath:jdbc.properties")
+@MapperScan(basePackages = "com.jxy.springMvc.dao")
+public class DataConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;
 
@@ -74,7 +76,7 @@ public class DataConfig{
     private String connectionProperties;
 
     @Bean     //声明其为Bean实例
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
 
         datasource.setUrl(this.dbUrl);
@@ -103,13 +105,13 @@ public class DataConfig{
 
     //mybatis的配置
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException{
+    public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();//mybatis-plus插件类
         sqlSessionFactoryBean.setDataSource(dataSource());//数据源
-        System.out.println(resourcePatternResolver.getResources("com.jxy.springMvc.mapper/*.xml").toString());
-        sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("com.jxy.springMvc.mapper/*.xml"));
-      //  sqlSessionFactoryBean.setTypeAliasesPackage("powerx.io.model");//别名，让*Mpper.xml实体类映射可以不加上具体包名
+        sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("classpath:mapper/*.xml"));
+        // sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("com.jxy.springMvc.mapper/*.xml"));
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.jxy.springMvc.entity");//别名，让*Mpper.xml实体类映射可以不加上具体包名
         return sqlSessionFactoryBean;
     }
 }
