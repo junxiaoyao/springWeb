@@ -3,6 +3,9 @@ package com.jxy.springMvc.configs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,6 +16,9 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.awt.*;
+import java.io.IOException;
+
 /**
  * @Auther: ybl
  * @Date: 2018/12/14 0014 10:17
@@ -20,7 +26,8 @@ import org.thymeleaf.templateresolver.TemplateResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.jxy.springMvc.controller")
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = {"com.jxy.springMvc.controller","com.jxy.springMvc.configs"})
 public class Webconfig extends WebMvcConfigurerAdapter {
     //视图解析器
     @Bean
@@ -50,7 +57,11 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
-
+  /*  //配置mutipart解析器
+    @Bean
+    public MultipartResolver multipartResolver()throws IOException{
+        return new StandardServletMultipartResolver();
+    }*/
     // 静态资源配置将静态资源的请求转发到servlet容器中默认的servlet上
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
