@@ -21,7 +21,7 @@
         </p>
         <div class="sn-quick-menu">
             <div class="login"><a th:href="login.html">登录</a></div>
-            <div class="login"><a th:href="login.html">th:${user.name}</a></div>
+            <div class="login"><a th:href="login.html"><p th:text="${user.userName}"></p></a></div>
             <div class="sp-cart"><a th:href="shopcart.html">购物车</a><span>2</span></div>
         </div>
     </div>

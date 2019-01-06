@@ -1,10 +1,14 @@
 package com.jxy.springMvc.controller;
 
 import com.jxy.springMvc.entity.Users;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Auther: ybl
@@ -23,4 +27,8 @@ public class HomeController {
         model.addAttribute("user",users);
         return "homePage";
     }
+    /*@ExceptionHandler()
+    public String notFoundHtml(HttpServletRequest request){
+        return "404";
+    }*/
 }

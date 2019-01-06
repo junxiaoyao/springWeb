@@ -27,7 +27,7 @@ import java.io.IOException;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.jxy.springMvc.controller","com.jxy.springMvc.configs"})
+@ComponentScan(basePackages = {"com.jxy.springMvc.controller", "com.jxy.springMvc.configs"})
 public class Webconfig extends WebMvcConfigurerAdapter {
     //视图解析器
     @Bean
@@ -57,19 +57,22 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
-  /*  //配置mutipart解析器
-    @Bean
-    public MultipartResolver multipartResolver()throws IOException{
-        return new StandardServletMultipartResolver();
-    }*/
+
     // 静态资源配置将静态资源的请求转发到servlet容器中默认的servlet上
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
+    //映射请求
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/statics/**").addResourceLocations("WEB-INF/statics/**");
+    }
+
+    //配置文件解析器
+    @Bean
+    public MultipartResolver multipartResolver() throws IOException {
+        return new StandardServletMultipartResolver();
     }
 }

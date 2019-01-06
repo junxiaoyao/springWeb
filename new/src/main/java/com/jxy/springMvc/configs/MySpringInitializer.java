@@ -26,9 +26,10 @@ public class MySpringInitializer extends AbstractAnnotationConfigDispatcherServl
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-    //设置多文件上传
+    //设置多文件上传，路径
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-       registration.setMultipartConfig(new MultipartConfigElement("file/uploads/"));
+       registration.setMultipartConfig(new MultipartConfigElement("D:/data/file"));
     }
+
 }
