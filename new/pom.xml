@@ -32,8 +32,9 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <thymeleafVersion>2.1.3.RELEASE</thymeleafVersion>
-    <springVersion>4.0.7.RELEASE</springVersion>
-    <springSecurity>3.2.0.RELEASE</springSecurity>
+    <springVersion>5.1.2.RELEASE</springVersion>
+    <springSecurityVersion>5.1.2.RELEASE</springSecurityVersion>
+    <jacksonVsersion>2.9.8</jacksonVsersion>
   </properties>
   <build>
     <!--<resources>
@@ -103,16 +104,27 @@
     </dependency>
     <!--springSecurity-->
     <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-    <!--<dependency>
+    <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
-      <version>${springSecurity}</version>
+      <version>${springSecurityVersion}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
-      <version>${springSecurity}</version>
-    </dependency>-->
+      <version>${springSecurityVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>${springSecurityVersion}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+      <version>3.0.4.RELEASE</version>
+    </dependency>
     <!--springframework-->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -148,20 +160,20 @@
     </dependency>
 
     <!-- 加载jackson包 -->
-    <dependency>
+   <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.7.3</version>
+      <version>${jacksonVsersion}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.7.3</version>
+      <version>${jacksonVsersion}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>2.7.3</version>
+      <version>${jacksonVsersion}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
     <dependency>
