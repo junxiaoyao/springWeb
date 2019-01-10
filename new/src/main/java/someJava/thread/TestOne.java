@@ -1,4 +1,4 @@
-package someJava.Testthread;
+package someJava.thread;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
