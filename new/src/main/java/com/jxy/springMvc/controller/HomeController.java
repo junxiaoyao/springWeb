@@ -27,6 +27,10 @@ public class HomeController {
         model.addAttribute("user",users);
         return "homePage";
     }
+    @RequestMapping("login")
+    public String login(HttpServletRequest request){
+        return "login";
+    }
     /*@ExceptionHandler()
     public String notFoundHtml(HttpServletRequest request){
         return "404";
