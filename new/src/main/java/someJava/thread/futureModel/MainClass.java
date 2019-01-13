@@ -29,14 +29,13 @@ public class MainClass {
             public void run() {
                 Future<String> future=executorService.submit(new MyCall());
                 try{
-                    System.out.println(future.get());
+                    System.out.println("futrue:"+future.get());
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }
 
             }
         }).start();
-
         System.out.println("----主线程执行后面---");
     }
 }
