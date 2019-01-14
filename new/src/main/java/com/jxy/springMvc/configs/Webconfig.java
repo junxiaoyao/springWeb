@@ -64,11 +64,11 @@ public class Webconfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
-    //映射请求
+  /*  //映射请求
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/statics/**").addResourceLocations("WEB-INF/statics/**");
-    }
+    }*/
 
     //配置文件解析器
     @Bean
