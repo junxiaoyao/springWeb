@@ -20,16 +20,20 @@ public class EnableSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers("/**");
+       // web.ignoring().antMatchers("/**");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .formLogin().loginPage("longin")
+                .and()
                 // 开始请求权限配置
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/loginIn").permitAll()
+                .antMatchers("/login").permitAll();
                 //允许所以通过
-                .anyRequest().permitAll();
+
     }
 }

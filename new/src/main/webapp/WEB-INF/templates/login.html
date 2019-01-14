@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/statics/assets/layui/css/layui.css}"/>
+    <script type="text/javascript" th:src="@{/statics/assets/layui/layui.js}"></script>
+    <title>登录</title>
+</head>
+<body>
+<div align="center">
+    <form th:action="@{/loginIn}" method="post">
+        <table>
+            <tr>
+                <td>
+                    <lable>登录名</lable>
+                </td>
+                <td><input name="userName" type="text"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <lable>密码</lable>
+                </td>
+                <td><input name="userPass" type="password"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input  type="submit" value="登录"/></td>
+            </tr>
+        </table>
+
+    </form>
+
+</div>
+</body>
+</html>

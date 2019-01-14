@@ -19,16 +19,22 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/")
 public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
-    public String home(Model model){
-        Users users=new Users();
+    public String home(HttpServletRequest request,Model model) {
+        Users users = new Users();
         users.setSex("男的");
         users.setUserName("宝天帝君");
-        model.addAttribute("name","luanfa");
-        model.addAttribute("user",users);
+        model.addAttribute("name", "luanfa");
+        model.addAttribute("user", users);
         return "homePage";
     }
+
     @RequestMapping("login")
-    public String login(HttpServletRequest request){
+    public String loginGet(HttpServletRequest request) {
+        return "login";
+    }
+
+    @RequestMapping(value = "loginIn", method = RequestMethod.POST)
+    public String loginPost(HttpServletRequest request) {
         return "login";
     }
     /*@ExceptionHandler()
