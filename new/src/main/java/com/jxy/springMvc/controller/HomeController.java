@@ -1,5 +1,6 @@
 package com.jxy.springMvc.controller;
 
+import com.jxy.springMvc.entity.UserDetail;
 import com.jxy.springMvc.entity.Users;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "loginIn", method = RequestMethod.POST)
-    public String loginPost(HttpServletRequest request) {
+    public String loginPost(UserDetail userDetail, HttpServletRequest request) {
         return "login";
     }
     /*@ExceptionHandler()
