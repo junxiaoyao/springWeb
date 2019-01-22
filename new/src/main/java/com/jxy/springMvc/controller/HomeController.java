@@ -3,6 +3,8 @@ package com.jxy.springMvc.controller;
 import com.jxy.springMvc.entity.UserDetail;
 import com.jxy.springMvc.entity.Users;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,6 +38,7 @@ public class HomeController {
 
     @RequestMapping(value = "loginIn", method = RequestMethod.POST)
     public String loginPost(UserDetail userDetail, HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "login";
     }
     /*@ExceptionHandler()

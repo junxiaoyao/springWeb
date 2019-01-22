@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service(value = "userDetailService")
 public class UserDetailService implements UserDetailsService {
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserDetail userDetail=new UserDetail();
