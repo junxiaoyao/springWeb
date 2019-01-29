@@ -36,7 +36,7 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping(value = "loginIn", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginPost(UserDetail userDetail, HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "login";

@@ -36,11 +36,11 @@ public class EnableSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity .formLogin()
                 //　//这里程序登陆页面，允许所有人进行登陆
                 .loginPage("/login").permitAll()
-                .loginProcessingUrl("/loginIn")
+                .loginProcessingUrl("/login")
                 //失败重新登录
                 .failureForwardUrl("/login")
                 //成功进入主界面
-                .successForwardUrl("/")
+               // .successForwardUrl("/")
                 .and().authorizeRequests().antMatchers("/").hasRole("ADMIN");
         /*httpSecurity
                 .formLogin().loginPage("longin")
