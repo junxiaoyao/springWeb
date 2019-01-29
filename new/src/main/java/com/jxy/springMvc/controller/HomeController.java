@@ -5,6 +5,7 @@ import com.jxy.springMvc.entity.Users;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,9 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String home(HttpServletRequest request,Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user=(User)authentication.getPrincipal();
         Users users = new Users();
         users.setSex("男的");
-        users.setUserName("宝天帝君");
+        users.setUserName(user.getUsername());
         model.addAttribute("name", "luanfa");
         model.addAttribute("user", users);
         return "homePage";
