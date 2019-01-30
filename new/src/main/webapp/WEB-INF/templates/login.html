@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" th:href="@{/statics/assets/layui/css/layui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/statics/css/login/css/style.css}" />
     <script type="text/javascript" th:src="@{/statics/assets/layui/layui.js}"></script>
     <title>登录</title>
 </head>
 <body onload='document.f.username.focus();'>
-<div align="center">
-    <form class="layui-form" th:action="@{/login}" method="post">
-        <div class="layui-form-item">
-            <label class="layui-form-label">登录名</label>
-            <div class="layui-input-block">
-                <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="登录名" class="layui-input" />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-                <input type="ssword怕是" name="password" lay-verify="title" autocomplete="off"
-                       placeholder="登录名" class="layui-input" />
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-            </div>
-        </div>
-    </form>
+<div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+</div>
+
+<div class="container">
+
+
+    <div id="login">
+
+        <form method="post" th:action="@{/login}">
+
+            <fieldset class="clearfix">
+
+                <p><span class="fontawesome-user"></span><input type="text" name="username" onBlur="if(this.value == '') this.value = 'username'" onFocus="if(this.value == 'username') this.value = ''" required="required"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                <p><span class="fontawesome-lock"></span><input type="password"  name="password" onBlur="if(this.value == '') this.value = 'password'" onFocus="if(this.value == 'password') this.value = ''" required="required" /></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                <p><input type="submit" value="Sign In" /></p>
+
+            </fieldset>
+
+        </form>
+
+        <p>没账号? <a href="#" class="blue">注册账号</a><span class="fontawesome-arrow-right"></span></p>
+
+    </div> <!-- end login -->
+
 </div>
 </body>
 </html>
