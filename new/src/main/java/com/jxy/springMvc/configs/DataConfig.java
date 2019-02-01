@@ -15,33 +15,35 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 
 @Configuration
 @PropertySource("classpath:jdbc.properties")
 @MapperScan(basePackages = "com.jxy.springMvc.dao")
 public class DataConfig {
+    //数据库url
     @Value("${spring.datasource.url}")
     private String dbUrl;
-
+    //用户名
     @Value("${spring.datasource.username}")
     private String username;
-
+    //密码
     @Value("${spring.datasource.password}")
     private String password;
-
+    //驱动
     @Value("${spring.datasource.driverClassName}")
     private String driverClassName;
-
+    //初始化链接数量
     @Value("${spring.datasource.initialSize}")
     private int initialSize;
-
+    //池中保持的最小连接数
     @Value("${spring.datasource.minIdle}")
     private int minIdle;
-
+    //最大连接数
     @Value("${spring.datasource.maxActive}")
     private int maxActive;
-
+    //最大等待可以连接时间
     @Value("${spring.datasource.maxWait}")
     private int maxWait;
 
@@ -62,10 +64,10 @@ public class DataConfig {
 
     @Value("${spring.datasource.testOnReturn}")
     private boolean testOnReturn;
-
+    //是否对预处理语句（prepared statement）进行池管理
     @Value("${spring.datasource.poolPreparedStatements}")
     private boolean poolPreparedStatements;
-
+    //同一时间最大分配的预处理语句数量
     @Value("${spring.datasource.maxPoolPreparedStatementPerConnectionSize}")
     private int maxPoolPreparedStatementPerConnectionSize;
 
@@ -78,7 +80,6 @@ public class DataConfig {
     @Bean     //声明其为Bean实例
     public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
-
         datasource.setUrl(this.dbUrl);
         datasource.setUsername(username);
         datasource.setPassword(password);
@@ -102,7 +103,11 @@ public class DataConfig {
         datasource.setConnectionProperties(connectionProperties);
         return datasource;
     }
-
+    //jdbcTemplate配置
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource){
+        return new JdbcTemplate(dataSource);
+    }
     //mybatis的配置
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {

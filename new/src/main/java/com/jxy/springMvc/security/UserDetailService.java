@@ -1,6 +1,8 @@
 package com.jxy.springMvc.security;
 
 import com.jxy.springMvc.entity.UserDetail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -11,11 +13,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 @Service(value = "userDetailService")
 public class UserDetailService implements UserDetailsService {
-
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        String sql="SELECT * FROM users";
+        List<Map<String,Object>> result=jdbcTemplate.queryForList(sql);
         UserDetail userDetail=new UserDetail();
         if(userName.equals("user")){
             userDetail.setUserName("user");
