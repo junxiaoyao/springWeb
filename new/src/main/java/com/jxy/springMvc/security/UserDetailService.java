@@ -1,6 +1,7 @@
 package com.jxy.springMvc.security;
 
 import com.jxy.springMvc.entity.UserDetail;
+import com.jxy.springMvc.repositoryService.RoleServiceRe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,11 +20,15 @@ import java.util.Map;
 public class UserDetailService implements UserDetailsService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private RoleServiceRe roleServiceRe;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         String sql="SELECT * FROM users";
-        List<Map<String,Object>> result=jdbcTemplate.queryForList(sql);
+      //  List<Map<String,Object>> result=jdbcTemplate.queryForList(sql);
+        roleServiceRe.testSave();
         UserDetail userDetail=new UserDetail();
+
         if(userName.equals("user")){
             userDetail.setUserName("user");
             userDetail.setRole(Roles.USERROLE);

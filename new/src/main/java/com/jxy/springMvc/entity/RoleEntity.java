@@ -1,8 +1,14 @@
 package com.jxy.springMvc.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.List;
-
+@Entity
+@Table(name="roles")
 public class RoleEntity {
+	@Id
 	private long roleId;//ID
 	private String roleName;//角色名字
     private List<Long> menuIdList;//权限列表

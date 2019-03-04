@@ -33,6 +33,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <thymeleafVersion>2.1.3.RELEASE</thymeleafVersion>
     <springVersion>4.3.6.RELEASE</springVersion>
+    <hibernateVsersion>5.2.2.Final</hibernateVsersion>
+    <spring-orm>1.2.6</spring-orm>
     <springSecurityVersion>4.2.1.RELEASE</springSecurityVersion>
     <jacksonVsersion>2.9.8</jacksonVsersion>
   </properties>
@@ -88,6 +90,25 @@
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring4</artifactId>
       <version>${thymeleafVersion}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernateVsersion}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-hibernate -->
+   <!-- <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-hibernate</artifactId>
+      <version>${spring-hibernate}</version>
+    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/springframework/spring-orm -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${springVersion}</version>
     </dependency>
 
     <!--J2EE-->

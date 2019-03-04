@@ -2,6 +2,7 @@ package com.jxy.springMvc.configs;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -13,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 @PropertySource("classpath:jdbc.properties")
@@ -103,11 +104,13 @@ public class DataConfig {
         datasource.setConnectionProperties(connectionProperties);
         return datasource;
     }
+
     //jdbcTemplate配置
     @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource){
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
+
     //mybatis的配置
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean() throws IOException {
@@ -118,5 +121,20 @@ public class DataConfig {
         // sqlSessionFactoryBean.setMapperLocations(resourcePatternResolver.getResources("com.jxy.springMvc.mapper/*.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("com.jxy.springMvc.entity");//别名，让*Mpper.xml实体类映射可以不加上具体包名
         return sqlSessionFactoryBean;
+    }
+
+    //hibernate配置
+    @Bean
+    public LocalSessionFactoryBean sessionFactoryBean(DataSource dataSource) {
+        /*LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+        sfb.setDataSource(dataSource);
+        sfb.setDataSource(dataSource);*/
+        LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
+        sfb.setDataSource(dataSource);
+        sfb.setPackagesToScan(new String[]{"com.jxy.springMvc.entity"});
+        Properties properties=new Properties();
+        properties.setProperty("dialect","org.hibernate.dialect.H2Dialect");
+        sfb.setHibernateProperties(properties);
+        return sfb;
     }
 }
