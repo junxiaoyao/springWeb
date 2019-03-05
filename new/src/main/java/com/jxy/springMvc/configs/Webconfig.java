@@ -27,7 +27,7 @@ import java.io.IOException;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.jxy.springMvc.controller", "com.jxy.springMvc.configs"})
+@ComponentScan(basePackages = {"com.jxy.springMvc.controller"})
 public class Webconfig extends WebMvcConfigurerAdapter {
     //视图解析器
     @Bean

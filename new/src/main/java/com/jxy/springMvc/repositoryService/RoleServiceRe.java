@@ -1,6 +1,6 @@
 package com.jxy.springMvc.repositoryService;
 
-import com.jxy.springMvc.entity.RoleEntity;
+import com.jxy.springMvc.hEntity.Role;
 import com.jxy.springMvc.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class RoleServiceRe {
     @Autowired
     private RoleRepository roleRepository;
     public void testSave(){
-        RoleEntity roleEntity=new RoleEntity();
+        Role roleEntity=new Role();
         roleEntity.setUserId(9);
         roleEntity.setRoleName("测试插入");
         roleEntity.setRoleId(9);

@@ -131,9 +131,10 @@ public class DataConfig {
         sfb.setDataSource(dataSource);*/
         LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
         sfb.setDataSource(dataSource);
-        sfb.setPackagesToScan(new String[]{"com.jxy.springMvc.entity"});
+        sfb.setPackagesToScan(new String[]{"com.jxy.springMvc.hEntity"});
         Properties properties=new Properties();
         properties.setProperty("dialect","org.hibernate.dialect.H2Dialect");
+        properties.setProperty("autoCommit ","true");
         sfb.setHibernateProperties(properties);
         return sfb;
     }

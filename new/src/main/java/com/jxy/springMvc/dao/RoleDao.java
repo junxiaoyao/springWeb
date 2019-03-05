@@ -2,9 +2,10 @@ package com.jxy.springMvc.dao;
 
 import com.jxy.springMvc.entity.RoleEntity;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface RoleDao extends BaseDao<RoleEntity> {
 	//List<RoleEntity> getListByRoleId(long id);
 	List<RoleEntity> getList(@Param("roleName") String roleName, int pageNum, int size);
