@@ -5,8 +5,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public class RoleRepository {
     @Autowired
     private SessionFactory sessionFactory;
@@ -21,7 +23,6 @@ public class RoleRepository {
     }
 
     public void save(Role e) {
-      /*  Role role=getCurrentSession().get(Role.class,1l);
-        getCurrentSession().saveOrUpdate(e);*/
+        getCurrentSession().saveOrUpdate(e);
     }
 }

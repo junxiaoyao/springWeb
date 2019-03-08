@@ -1,4 +1,4 @@
-package someJava.designModel;
+package someJava.deSignModels.proxy;
 
 /**
  * @Auther: jxy

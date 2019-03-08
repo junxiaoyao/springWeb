@@ -1,17 +1,18 @@
 package com.jxy.springMvc.hEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="roles")
 public class Role {
+	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long roleId;//ID
 	private String roleName;//角色名字
-    private String createTime;//创建时间
+    private Date createTime;//创建时间
     private String remark;//备注
     private long userId;//创建人ID
     private String userName;//创建人
@@ -27,10 +28,10 @@ public class Role {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	public String getRemark() {

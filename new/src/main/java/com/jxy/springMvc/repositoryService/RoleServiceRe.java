@@ -15,8 +15,7 @@ public class RoleServiceRe {
         Role roleEntity=new Role();
         roleEntity.setUserId(9);
         roleEntity.setRoleName("测试插入");
-        roleEntity.setRoleId(9);
-        roleEntity.setCreateTime(new Date().toString());
+        roleEntity.setCreateTime(new Date());
         roleEntity.setRemark("测试");
         roleEntity.setUserName("rss");
         roleRepository.save(roleEntity);

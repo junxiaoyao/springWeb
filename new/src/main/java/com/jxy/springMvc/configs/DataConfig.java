@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
@@ -126,16 +128,22 @@ public class DataConfig {
     //hibernate配置
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean(DataSource dataSource) {
-        /*LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
-        sfb.setDataSource(dataSource);
-        sfb.setDataSource(dataSource);*/
         LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
         sfb.setDataSource(dataSource);
         sfb.setPackagesToScan(new String[]{"com.jxy.springMvc.hEntity"});
         Properties properties=new Properties();
-        properties.setProperty("dialect","org.hibernate.dialect.H2Dialect");
+        properties.setProperty("dialect","org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("autoCommit ","true");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("format_sql", "true");
+        properties.setProperty("current_session_context_class","thread");
         sfb.setHibernateProperties(properties);
         return sfb;
+    }
+
+    @Bean
+    public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager hibernateTransactionManage = new HibernateTransactionManager(sessionFactory);
+        return hibernateTransactionManage;
     }
 }

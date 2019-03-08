@@ -1,4 +1,4 @@
-package someJava.designModel;
+package someJava.deSignModels.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

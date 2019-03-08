@@ -1,4 +1,4 @@
-package someJava.designModel;
+package someJava.deSignModels.proxy;
 
 public interface ISay {
     void say();
